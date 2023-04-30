@@ -1,0 +1,25 @@
+package com.beetrootforum.beetrootforum.jpa;
+
+import com.beetrootforum.beetrootforum.enums.RoleName;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "roles")
+public class Role {
+    @Id
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private RoleName name;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+}
