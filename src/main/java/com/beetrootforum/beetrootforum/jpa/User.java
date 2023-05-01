@@ -1,32 +1,40 @@
 package com.beetrootforum.beetrootforum.jpa;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "username"),
+                @UniqueConstraint(columnNames = "email")
+        })
 public class User {
+
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "username", nullable = false, unique = true)
+    @Max(20)
+    @Min(3)
     private String username;
 
-    @Column(name = "password", nullable = false)
-    private String password;
-
     @Column(name = "email", nullable = false, unique = true)
+    @Max(50)
     private String email;
 
     @Column(name = "public_key", nullable = false, unique = true)
+    @Max(1000)
     private String publicKey;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> role;
+    private Set<Role> roles;
 
 
     public Long getId() {
@@ -45,14 +53,6 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -69,11 +69,11 @@ public class User {
         this.publicKey = publicKey;
     }
 
-    public Set<Role> getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Set<Role> role) {
-        this.role = role;
+    public void setRole(Set<Role> roles) {
+        this.roles = roles;
     }
 }
