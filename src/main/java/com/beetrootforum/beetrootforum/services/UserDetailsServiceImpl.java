@@ -2,6 +2,7 @@ package com.beetrootforum.beetrootforum.services;
 
 
 import com.beetrootforum.beetrootforum.data.user.FullUserData;
+import com.beetrootforum.beetrootforum.jpa.Role;
 import com.beetrootforum.beetrootforum.jpa.User;
 import com.beetrootforum.beetrootforum.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Set;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -38,5 +40,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 user.getPublicKey(),
                 user.getRoles()
         );
+    }
+
+    @Transactional
+    public void save(String username, String email, String publicKey, Set<Role> roles) {
+        User user = new User();
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPublicKey(publicKey);
+        user.setRoles(roles);
+        userRepository.save(user);
     }
 }

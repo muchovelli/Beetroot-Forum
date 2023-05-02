@@ -41,11 +41,11 @@ public class AuthService {
 
         User user = new User();
         user.setEmail(registerForm.getEmail());
-        user.setPassword(registerForm.getPassword());
+        user.setPublicKey(registerForm.getPublicKey());
         user.setUsername(registerForm.getUsername());
         user.setPublicKey(registerForm.getPublicKey());
-        Role role = roleRepository.findByName(RoleName.ROLE_USER).orElseThrow(() -> new ResourceNotFoundException("Role"));
-        user.setRole(Collections.singleton(role));
+        Role role = roleRepository.findByRoleName(RoleName.ROLE_USER).orElseThrow(() -> new ResourceNotFoundException("Role"));
+        user.setRoles(Collections.singleton(role));
         return user;
     }
 }

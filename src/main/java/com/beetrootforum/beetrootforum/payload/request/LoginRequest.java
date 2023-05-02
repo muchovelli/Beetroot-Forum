@@ -7,14 +7,14 @@ public class LoginRequest {
     @NotBlank
     private String username;
     @NotBlank
-    private String password;
+    private String publicKey;
 
     public LoginRequest() {
     }
 
-    public LoginRequest(String username, String password) {
+    public LoginRequest(String username, String publicKey) {
         this.username = username;
-        this.password = password;
+        this.publicKey = publicKey;
     }
 
     public String getUsername() {
@@ -25,11 +25,11 @@ public class LoginRequest {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPublicKey() {
+        return publicKey;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
     }
 }

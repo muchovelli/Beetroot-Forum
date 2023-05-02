@@ -1,8 +1,6 @@
 package com.beetrootforum.beetrootforum.jpa;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.util.Set;
 
 @Entity
@@ -18,16 +16,12 @@ public class User {
     private Long id;
 
     @Column(name = "username", nullable = false, unique = true)
-    @Max(20)
-    @Min(3)
     private String username;
 
     @Column(name = "email", nullable = false, unique = true)
-    @Max(50)
     private String email;
 
     @Column(name = "public_key", nullable = false, unique = true)
-    @Max(1000)
     private String publicKey;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -35,6 +29,9 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+    public User() {
+    }
 
 
     public Long getId() {
@@ -73,7 +70,7 @@ public class User {
         return roles;
     }
 
-    public void setRole(Set<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 }
