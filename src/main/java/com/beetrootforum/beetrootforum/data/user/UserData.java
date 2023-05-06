@@ -1,24 +1,29 @@
 package com.beetrootforum.beetrootforum.data.user;
 
+import com.beetrootforum.beetrootforum.data.KeyData;
+import com.beetrootforum.beetrootforum.jpa.Role;
+
 import java.io.Serializable;
+import java.util.Set;
 
 public class UserData implements Serializable {
 
     private Long id;
     private String username;
     private String email;
-    private String publicKey;
+    private KeyData publicKey;
+    private Set<Role> roles;
 
     public UserData() {
     }
 
-    public UserData(String username, String email, String publicKey) {
+    public UserData(String username, String email, KeyData publicKey) {
         this.username = username;
         this.email = email;
         this.publicKey = publicKey;
     }
 
-    public UserData(Long id, String username, String email, String publicKey) {
+    public UserData(Long id, String username, String email, KeyData publicKey) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -49,11 +54,19 @@ public class UserData implements Serializable {
         this.email = email;
     }
 
-    public String getPublicKey() {
+    public KeyData getPublicKey() {
         return publicKey;
     }
 
-    public void setPublicKey(String publicKey) {
+    public void setPublicKey(KeyData publicKey) {
         this.publicKey = publicKey;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

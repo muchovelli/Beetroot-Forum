@@ -11,6 +11,7 @@ import com.beetrootforum.beetrootforum.payload.response.JwtResponse;
 import com.beetrootforum.beetrootforum.payload.response.MessageResponse;
 import com.beetrootforum.beetrootforum.repository.RoleRepository;
 import com.beetrootforum.beetrootforum.repository.UserRepository;
+import com.beetrootforum.beetrootforum.services.KeyService;
 import com.beetrootforum.beetrootforum.services.UserDetailsImpl;
 import com.beetrootforum.beetrootforum.services.UserDetailsServiceImpl;
 import org.slf4j.Logger;
@@ -44,15 +45,17 @@ public class AuthController {
     AuthenticationManager authenticationManager;
     UserRepository userRepository;
     RoleRepository roleRepository;
+    KeyService keyService;
     PasswordEncoder encoder;
     JwtUtils jwtUtils;
 
     @Autowired
-    public AuthController(UserDetailsServiceImpl userService, AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder encoder, JwtUtils jwtUtils) {
+    public AuthController(UserDetailsServiceImpl userService, AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, KeyService keyService, PasswordEncoder encoder, JwtUtils jwtUtils) {
         this.userService = userService;
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.keyService = keyService;
         this.encoder = encoder;
         this.jwtUtils = jwtUtils;
     }
@@ -97,7 +100,7 @@ public class AuthController {
         //TODO change password to public key
         FullUserData user = new FullUserData(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPublicKey()));
+                keyService.convert(signUpRequest.getPublicKey()));
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();

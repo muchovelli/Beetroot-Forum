@@ -1,5 +1,6 @@
 package com.beetrootforum.beetrootforum.services;
 
+import com.beetrootforum.beetrootforum.data.KeyData;
 import com.beetrootforum.beetrootforum.data.user.FullUserData;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,10 +17,10 @@ public class UserDetailsImpl implements UserDetails {
     private Long id;
     private String username;
     private String email;
-    private String publicKey;
+    private KeyData publicKey;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String username, String email, String publicKey, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(Long id, String username, String email, KeyData publicKey, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -95,15 +96,17 @@ public class UserDetailsImpl implements UserDetails {
         this.email = email;
     }
 
-    public String getPublicKey() {
+    public KeyData getPublicKey() {
         return publicKey;
     }
 
-    public void setPublicKey(String publicKey) {
+    public void setPublicKey(KeyData publicKey) {
         this.publicKey = publicKey;
     }
 
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
+    
+
 }

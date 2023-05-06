@@ -1,11 +1,17 @@
 package com.beetrootforum.beetrootforum.forms;
 
+import com.beetrootforum.beetrootforum.data.KeyData;
+import com.beetrootforum.beetrootforum.jpa.Role;
+
+import java.util.Set;
+
 public class RegisterForm {
 
     private String username;
     private String password;
     private String email;
-    private String publicKey;
+    private KeyData publicKey;
+    private Set<Role> roles;
 
     public String getUsername() {
         return username;
@@ -31,11 +37,19 @@ public class RegisterForm {
         this.email = email;
     }
 
-    public String getPublicKey() {
+    public KeyData getPublicKey() {
         return publicKey;
     }
 
-    public void setPublicKey(String publicKey) {
+    public void setPublicKey(KeyData publicKey) {
         this.publicKey = publicKey;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

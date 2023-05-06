@@ -1,5 +1,7 @@
 package com.beetrootforum.beetrootforum.payload.request;
 
+import com.beetrootforum.beetrootforum.jpa.Key;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -19,7 +21,7 @@ public class SingupRequest {
     private Set<String> role;
 
     @NotBlank
-    public String publicKey;
+    public Key publicKey;
 
     public String getUsername() {
         return username;
@@ -45,11 +47,11 @@ public class SingupRequest {
         this.role = role;
     }
 
-    public String getPublicKey() {
+    public Key getPublicKey() {
         return publicKey;
     }
 
-    public void setPublicKey(String publicKey) {
+    public void setPublicKey(Key publicKey) {
         this.publicKey = publicKey;
     }
 }

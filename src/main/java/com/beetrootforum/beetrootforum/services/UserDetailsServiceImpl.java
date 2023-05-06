@@ -1,7 +1,9 @@
 package com.beetrootforum.beetrootforum.services;
 
 
+import com.beetrootforum.beetrootforum.data.KeyData;
 import com.beetrootforum.beetrootforum.data.user.FullUserData;
+import com.beetrootforum.beetrootforum.jpa.Key;
 import com.beetrootforum.beetrootforum.jpa.Role;
 import com.beetrootforum.beetrootforum.jpa.User;
 import com.beetrootforum.beetrootforum.repository.UserRepository;
@@ -18,10 +20,12 @@ import java.util.Set;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final KeyService keyService;
 
     @Autowired
-    public UserDetailsServiceImpl(UserRepository userRepository) {
+    public UserDetailsServiceImpl(UserRepository userRepository, KeyService keyService) {
         this.userRepository = userRepository;
+        this.keyService = keyService;
     }
 
     @Override
@@ -37,17 +41,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return new FullUserData(
                 user.getUsername(),
                 user.getEmail(),
-                user.getPublicKey(),
+                keyService.convert(user.getPublicKey()),
                 user.getRoles()
         );
     }
 
     @Transactional
-    public void save(String username, String email, String publicKey, Set<Role> roles) {
+    public void save(String username, String email, KeyData publicKey, Set<Role> roles) {
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
-        user.setPublicKey(publicKey);
+        user.setPublicKey(new Key(publicKey.getPublicKey(), publicKey.getUser()));
         user.setRoles(roles);
         userRepository.save(user);
     }

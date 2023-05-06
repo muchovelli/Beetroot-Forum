@@ -1,5 +1,6 @@
 package com.beetrootforum.beetrootforum.data.user;
 
+import com.beetrootforum.beetrootforum.data.KeyData;
 import com.beetrootforum.beetrootforum.jpa.Role;
 
 import java.util.Set;
@@ -10,11 +11,11 @@ public class FullUserData extends UserData {
     public FullUserData() {
     }
 
-    public FullUserData(String username, String email, String publicKey) {
+    public FullUserData(String username, String email, KeyData publicKey) {
         super(username, email, publicKey);
     }
 
-    public FullUserData(String username, String email, String publicKey, Set<Role> roles) {
+    public FullUserData(String username, String email, KeyData publicKey, Set<Role> roles) {
         super(username, email, publicKey);
         this.roles = roles;
     }

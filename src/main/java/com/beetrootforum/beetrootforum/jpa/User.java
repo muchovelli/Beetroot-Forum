@@ -22,7 +22,8 @@ public class User {
     private String email;
 
     @Column(name = "public_key", nullable = false, unique = true)
-    private String publicKey;
+    @OneToOne
+    private Key publicKey;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -58,19 +59,19 @@ public class User {
         this.email = email;
     }
 
-    public String getPublicKey() {
-        return publicKey;
-    }
-
-    public void setPublicKey(String publicKey) {
-        this.publicKey = publicKey;
-    }
-
     public Set<Role> getRoles() {
         return roles;
     }
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Key getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(Key publicKey) {
+        this.publicKey = publicKey;
     }
 }
