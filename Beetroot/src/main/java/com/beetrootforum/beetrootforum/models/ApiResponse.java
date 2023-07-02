@@ -1,4 +1,4 @@
-package com.beetrootforum.beetrootforum.model;
+package com.beetrootforum.beetrootforum.models;
 
 public class ApiResponse {
 
